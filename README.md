@@ -23,6 +23,7 @@ python main.py      # creates instance/volumes/user_management.db and starts the
 - `model/user.py`: `User` model and `initUsers()` default users
 - `api/jwt_authorize.py`: `@token_required` JWT cookie guard
 - `api/user.py`: REST API for sign up, log in/out, profile, admin user list
+- `api/chat.py`: support assistant; forwards the site chatbot to Google Gemini using `GEMINI_API_KEY` from `.env`
 - `.env`: secret key and passwords (not committed)
 - `instance/volumes/user_management.db`: SQLite database (created on first run, not committed)
 - `Dockerfile`, `docker-compose.yml`: production server (gunicorn on port 8587)
@@ -51,6 +52,7 @@ Starting passwords come from `.env`: `ADMIN_PASSWORD` for the site admin and `<F
 | PUT | `/api/user` | Update `{name, email, phone}` and/or `{current_password, new_password}` |
 | GET | `/api/user` | Admin only: list every user |
 | DELETE | `/api/user` | Admin only: delete a user `{uid}` |
+| POST | `/api/chat` | Support assistant `{messages: [{role: "user"\|"model", text}]}` → `{reply}` (needs `GEMINI_API_KEY` in `.env`; optional `GEMINI_MODEL`, default `gemini-2.5-flash`) |
 
 ## Deploying
 Deploy it like Open Coding Society flask, on a server with Docker:

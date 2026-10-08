@@ -10,12 +10,14 @@ adds the default users, and serves the API on http://localhost:8587
 from flask import jsonify
 
 from __init__ import app, db
+from api.chat import chat_api
 from api.user import user_api
 from model.user import initUsers
 
 
 # Register URIs for API endpoints
 app.register_blueprint(user_api)
+app.register_blueprint(chat_api)
 
 
 @app.route('/')

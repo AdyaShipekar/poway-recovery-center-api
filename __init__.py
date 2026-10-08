@@ -64,6 +64,10 @@ app.config['JWT_TOKEN_MAX_AGE'] = int(os.environ.get('JWT_TOKEN_MAX_AGE') or 604
 # which needs SameSite=None; Secure cookies (same switch OCS uses)
 app.config['IS_PRODUCTION'] = (os.environ.get('IS_PRODUCTION') or 'false').lower() == 'true'
 
+# Support assistant (Google Gemini) - get a key at https://aistudio.google.com/apikey
+app.config['GEMINI_API_KEY'] = os.environ.get('GEMINI_API_KEY') or ''
+app.config['GEMINI_MODEL'] = os.environ.get('GEMINI_MODEL') or 'gemini-2.5-flash'
+
 # Database settings - SQLite in instance/volumes/ (OCS layout)
 dbName = 'user_management'
 os.makedirs(os.path.join(app.instance_path, 'volumes'), exist_ok=True)
